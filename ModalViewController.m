@@ -1,6 +1,6 @@
 /*
-     File: PageOneViewController.m
- Abstract: The view controller for page one of this sample.
+     File: ModalViewController.m
+ Abstract: The view controller presented modally.
   Version: 1.8
  
  Disclaimer: IMPORTANT:  This Apple software is supplied to you by Apple
@@ -45,34 +45,57 @@
  
  */
 
-#import "PageOneViewController.h"
+#import "ModalViewController.h"
 #import "Constants.h"
 
-@implementation PageOneViewController
+@interface ModalViewController ()
+- (id)infoValueForKey:(NSString *)key;
+@end
+
+@implementation ModalViewController
+
+@synthesize appName, copyright;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
 	if (!(self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]))
         return nil;
-
-    self.title = NSLocalizedString(@"PageOneTitle", @"");
-
+    
+    self.title = NSLocalizedString(@"ModalTitle", @"");
+	
 	return self;
+}
+
+- (void)dealloc
+{
+    [appName release];
+    [copyright release];
+	[super dealloc];
 }
 
 - (void)viewDidLoad
 {
-	// Add our custom add button as the nav bar's custom right view
-	UIBarButtonItem *addButton = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"AddTitle", @"")
-																   style:UIBarButtonItemStyleBordered
-																  target:self
-																  action:@selector(addAction:)] autorelease];
-	self.navigationItem.rightBarButtonItem = addButton;
+	self.view.backgroundColor = [UIColor whiteColor];
+	
+	self.appName.text = [self infoValueForKey:@"CFBundleName"];
+	self.copyright.text = [self infoValueForKey:@"NSHumanReadableCopyright"];
 }
 
-- (IBAction)addAction:(id)sender
+- (void)viewDidUnload
 {
-	// The add button was clicked, handle it here
+	self.appName = nil;
+	self.copyright = nil;
+}
+
+- (id)infoValueForKey:(NSString *)key
+{
+    // fetch objects from our bundle based on keys in our Info.plist
+	return [[[NSBundle mainBundle] localizedInfoDictionary] objectForKey:key] ? : [[[NSBundle mainBundle] infoDictionary] objectForKey:key];
+}
+
+- (IBAction)dismissAction:(id)sender
+{
+	[self.parentViewController dismissModalViewControllerAnimated:YES];
 }
 
 @end

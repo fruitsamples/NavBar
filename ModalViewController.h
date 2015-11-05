@@ -1,6 +1,6 @@
 /*
-     File: PageOneViewController.m
- Abstract: The view controller for page one of this sample.
+     File: ModalViewController.h
+ Abstract: The view controller presented modally.
   Version: 1.8
  
  Disclaimer: IMPORTANT:  This Apple software is supplied to you by Apple
@@ -45,34 +45,15 @@
  
  */
 
-#import "PageOneViewController.h"
-#import "Constants.h"
+#import <UIKit/UIKit.h>
 
-@implementation PageOneViewController
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+@interface ModalViewController : UIViewController
 {
-	if (!(self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]))
-        return nil;
-
-    self.title = NSLocalizedString(@"PageOneTitle", @"");
-
-	return self;
+	UILabel *appName, *copyright;
 }
 
-- (void)viewDidLoad
-{
-	// Add our custom add button as the nav bar's custom right view
-	UIBarButtonItem *addButton = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"AddTitle", @"")
-																   style:UIBarButtonItemStyleBordered
-																  target:self
-																  action:@selector(addAction:)] autorelease];
-	self.navigationItem.rightBarButtonItem = addButton;
-}
+@property (nonatomic, retain) IBOutlet UILabel *appName, *copyright;
 
-- (IBAction)addAction:(id)sender
-{
-	// The add button was clicked, handle it here
-}
+- (IBAction)dismissAction:(id)sender;
 
 @end
