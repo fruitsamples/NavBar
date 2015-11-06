@@ -7,10 +7,10 @@ In addition, this sample shows a technique in how to manage multiple nib files o
 	- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil;
 
 Build Requirements
-Mac OS X 10.5.6 or later, iPhone SDK 3.0
+iOS 4.0 SDK
 
 Runtime Requirements
-Mac OS X 10.5.6 or later, iPhone SDK 3.0
+iPhone OS 3.2 or later
 
 Using the Sample
 Build and run the sample using Xcode 3.1. To run in the simulator, set the Active SDK to Simulator. To run on a device, set the Active SDK to the appropriate Device setting.
@@ -58,5 +58,6 @@ Changes from Previous Versions
 1.6 - Changed bundle identifier.
 1.7 - Updated for and tested with iPhone OS 2.0. First public release.
 1.8 - Upgraded for 3.0 SDK due to deprecated APIs; in "cellForRowAtIndexPath" it now uses UITableViewCell's initWithStyle. Now uses viewDidUnload.
+1.9 - Upgraded project to build with the iOS 4.0 SDK.
 
-Copyright (C) 2008-2009 Apple Inc. All rights reserved.
+Copyright (C) 2008-2010 Apple Inc. All rights reserved.
