@@ -1,7 +1,7 @@
 /*
      File: PageFiveViewController.m
  Abstract: The view controller for page five of this sample.
-  Version: 1.9
+  Version: 1.11
  
  Disclaimer: IMPORTANT:  This Apple software is supplied to you by Apple
  Inc. ("Apple") in consideration of your agreement to the following
@@ -41,7 +41,7 @@
  STRICT LIABILITY OR OTHERWISE, EVEN IF APPLE HAS BEEN ADVISED OF THE
  POSSIBILITY OF SUCH DAMAGE.
  
- Copyright (C) 2010 Apple Inc. All Rights Reserved.
+ Copyright (C) 2012 Apple Inc. All Rights Reserved.
  
  */
 
@@ -52,11 +52,12 @@
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-	if (!(self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]));
-    
-    self.title = NSLocalizedString(@"PageFiveTitle", @"");
-    self.navigationItem.prompt = NSLocalizedString(@"Please select the appropriate media type:", @"Page Five Prompt");
-	
+	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self != nil)
+    {
+        self.title = NSLocalizedString(@"PageFiveTitle", @"");
+        self.navigationItem.prompt = NSLocalizedString(@"Please select the appropriate media type:", @"Page Five Prompt");
+	}
 	return self;
 }
 

@@ -1,7 +1,7 @@
 /*
      File: MainViewController.m
  Abstract: The application's main view controller (front page).
-  Version: 1.9
+  Version: 1.11
  
  Disclaimer: IMPORTANT:  This Apple software is supplied to you by Apple
  Inc. ("Apple") in consideration of your agreement to the following
@@ -41,7 +41,7 @@
  STRICT LIABILITY OR OTHERWISE, EVEN IF APPLE HAS BEEN ADVISED OF THE
  POSSIBILITY OF SUCH DAMAGE.
  
- Copyright (C) 2010 Apple Inc. All Rights Reserved.
+ Copyright (C) 2012 Apple Inc. All Rights Reserved.
  
  */
 
@@ -75,7 +75,9 @@ static NSArray *pageNames = nil;
 
 - (void)viewDidLoad
 {
-	// Make the title of this page the same as the title of this app
+	[super viewDidLoad];
+    
+    // Make the title of this page the same as the title of this app
 	self.title = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"];
 		
 	self.menuList = [NSMutableArray array];
@@ -102,19 +104,21 @@ static NSArray *pageNames = nil;
 	}
 	
     // Create a final modal view controller
-	UIButton* modalViewButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
-	[modalViewButton addTarget:self action:@selector(modalViewAction:) forControlEvents:UIControlEventTouchUpInside];
+	UIButton *modalViewButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
+	[modalViewButton addTarget:self
+                        action:@selector(modalViewAction:)
+              forControlEvents:UIControlEventTouchUpInside];
 	UIBarButtonItem *modalBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:modalViewButton];
 	self.navigationItem.rightBarButtonItem = modalBarButtonItem;
 	[modalBarButtonItem release];
-	
-	[self.myTableView reloadData];
 }
 
 - (void)viewDidUnload
 {
 	self.myTableView = nil;
 	self.menuList = nil;
+    
+    [super viewDidUnload];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -219,16 +223,17 @@ static NSArray *pageNames = nil;
 - (IBAction)styleAction:(id)sender
 {
 	UIActionSheet *styleAlert = [[UIActionSheet alloc] initWithTitle:@"Choose a UIBarStyle:"
-												delegate:self cancelButtonTitle:@"Cancel"
-												destructiveButtonTitle:nil
-												otherButtonTitles:	@"Default",
-																	@"BlackOpaque",
-																	@"BlackTranslucent",
+                                                            delegate:self
+                                                   cancelButtonTitle:@"Cancel"
+                                              destructiveButtonTitle:nil
+                                                   otherButtonTitles:@"Default",
+																	 @"BlackOpaque",
+																	 @"BlackTranslucent",
 																	nil,
 																	nil];
 	
 	// use the same style as the nav bar
-	styleAlert.actionSheetStyle = self.navigationController.navigationBar.barStyle;
+	styleAlert.actionSheetStyle = (UIActionSheetStyle)self.navigationController.navigationBar.barStyle;
 	
 	[styleAlert showInView:self.view];
 	[styleAlert release];
